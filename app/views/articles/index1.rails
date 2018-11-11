@@ -1,0 +1,31 @@
+<table>
+  <thead>
+    <tr>
+      <th>Caption</th>
+      <th>Month</th>
+      <th>Client</th>
+      <th>Publication</th>
+      <th>Super topic </th>      
+      <th>Topic</th>
+      <th>Link</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.caption %></td>
+        <td><a href="<%= article.link %>" target="_blank"><%= article.pub_year %>/<%= article.pub_month %></a></td>
+        <td><%= article.publication.client.client_name %></td>
+        <td><%= article.publication.pub_name %></td>
+        <td><%= article.topic.super_topic.caption %></td>
+        <td><%= article.topic.caption %></td>
+        <td><a href="<%= article.link %>" target="_blank"> <%= article.deslug(article.link) %> </a></td>
+        <td><%= link_to 'Show', article %></td>
+        <td><%= link_to 'Edit', edit_article_path(article) %></td>
+        <td><%= link_to 'Delete', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,29 @@
+<header id="page-header">	
+  <div id="masthead">
+  	<table>
+  		<tr>
+  			<td>
+					<h1>Illuminage Content Tracker</h1>
+				</td>
+				<td>
+					<% if logged_in? %>
+						<%= link_to 'Sign Out', logout_path, class: "button" %>
+						<td>
+							<h2><%= current_user.email %>
+								<% if current_user.admin? %>
+									 (admin)
+										<td><%= link_to 'Create a New User', new_user_path, class: "button" %> </td>
+										<td><%= link_to 'List Users', users_path, class: "button" %> </td>
+								<% end %>
+
+							</h2>
+						</td>
+				<% else %>
+						<%= link_to 'Sign In', login_path, class: "button" %> 
+						<td></td>
+					<% end %>
+				</td>	
+			</tr>
+		</table>
+	</div>
+</header>

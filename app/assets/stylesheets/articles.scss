@@ -1,0 +1,28 @@
+// Place all the styles related to the Articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#header {
+  position: fixed;
+  top: 50px;
+  height: 200px;
+  width: 100%;
+  background: white;
+}
+#body{ 
+	margin-top: 250px; 
+}
+#pagenotice {
+  position: fixed;
+  top: 50px;
+  height: 200px;
+  width: 100%;
+  background: white;
+  float: right;
+}
+
+#linkpeek {
+    margin: 0 auto;
+    border: 2px solid gray;
+    width: 350px;
+}
+

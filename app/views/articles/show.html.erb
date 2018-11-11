@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @article.caption %>
+</p>
+
+<p>
+  <strong>Pub year:</strong>
+  <%= @article.pub_year %>
+</p>
+
+<p>
+  <strong>Pub month:</strong>
+  <%= @article.pub_month %>
+</p>
+
+<p>
+  <strong>Publication:</strong>
+  <%= @article.publication_id %>
+</p>
+
+<p>
+  <strong>Topic:</strong>
+  <%= @article.topic_id %>
+</p>
+
+<p>
+  <strong>Super topic:</strong>
+  <%= @article.super_topic_id %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @article.link %>
+</p>
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>

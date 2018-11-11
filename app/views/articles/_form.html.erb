@@ -1,0 +1,129 @@
+<%= form_for(article) do |f| %>
+  <% if article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<table> <!-- first table -->
+    <tr class="flex_table"> 
+      <td>
+        <div class="field">
+          <%= f.label 'Article caption' %>
+          <%= f.text_field :caption, :size=>"70", autofocus: true  %>
+        </div>
+      </td>
+      <td width="400">
+        <div class="field">
+          <%= f.label  'Article link' %>
+          <%= f.text_field :link, :size=>"120" %>
+        </div>
+      </td>
+    </tr>
+</table>
+<table>
+      <tr>
+      <td align="bottom">Year: <br>
+        <% (Article.minimum_year..Article.next_year).each do |year| %>
+          <%= f.radio_button :pub_year, year %>  
+          <% if  article.pub_year == year %>
+            <strong><font color="red"> <%= year %></font></strong>
+          <% else %>
+            <strong><%= year %></strong>
+          <% end %>
+        <% end %>
+        
+      </td>
+
+      <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+      <td align="bottom" >Month: <br>
+        
+        <% (1..12).each do |month| %>
+          <%= f.radio_button :pub_month, month %>  
+          <% if  article.pub_month == month %>
+            <strong><font color="red"> <%= month %></font></strong>
+          <% else %>
+            <strong><%= month %></strong>
+          <% end %>
+        <% end %>        
+      </td>
+   </tr>
+</table>
+
+<table> <!-- second table -->   
+  <% max_columns = 5 %>
+  <% (1..max_columns).each do |i| %>  
+    <col width = "350" >
+  <% end %>
+  <% break_line = (SuperTopic.count + Topic.count) / (max_columns.to_f - 1.0 ).to_f  %>
+  <tr>
+    <td class="flex_table">
+    <h2>Clients & Publications</h2>
+    <div class="field">
+      <% Client.order(:client_name).each do |client| %>
+          <% if article.publication && article.publication.client_id == client.id %>
+            <strong><font color="red"><%= client.client_name %></br></font></strong>
+          <% else %>
+            <strong><%= client.client_name %></br></strong>
+          <% end %>
+
+        <% Publication.where("client_id = ?", client.id).order(:pub_name).each do |pub| %>
+          <div class="bullet_indent">
+            <%= f.radio_button :publication_id, pub.id  %>
+            <% if article.publication_id == pub.id %>
+              <strong><font color="red"> <%= pub.pub_name %></br></font></strong>
+            <% else %>
+              <%= pub.pub_name %></br>
+            <% end %>
+          </div>
+        <% end %>  
+      <% end %>
+    </div>
+    </td>
+
+    <% line_no = 1 %>
+    <td class="flex_table">
+    <h2>SuperTopics & Topics</h2>
+    <div class="field">
+      <% SuperTopic.order(:caption).each do |supertopic| %>
+        <% if line_no >= break_line %>
+          <td class = "flex_table">
+          <% line_no = 1 %>
+      <% end %>
+        <% line_no += 1 %>
+        <% if article.topic.present? && article.topic.super_topic_id == supertopic.id %>
+          <strong><font color="red"> <%= article.topic.super_topic.caption %></br></font></strong>
+        <% else %>
+          <strong><%= supertopic.caption %></br></strong>
+        <% end %>
+
+        <% Topic.where("super_topic_id = ?", supertopic.id).order(:caption).each do |topic| %>
+          <div class="bullet_indent">
+            <%= f.radio_button :topic_id, topic.id  %>
+            <% line_no += 1 %>
+            <% if article.topic_id == topic.id %>
+              <strong><font color="red"> <%= topic.caption %></br></font></strong>
+            <% else %>
+              <%= topic.caption %></br>
+            <% end %>
+          <% end %>
+
+          </div>
+        <% end %>  
+      
+    </div>
+    </td>
+  </tr>
+</table>
+  
+<% end %>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+    <td>
+      <h1>Clients & Their Publications</h1>
+    </td>
+    <td>
+      <%= link_to 'CANCEL & RETURN', root_path, class: 'button' %>
+    </td>
+  </tr>
+</table>
+
+<%= link_to 'Create a New Client', new_client_path, class: 'button' %>
+<hr>
+<br>(click to edit)
+
+<table>
+  <tbody>
+    <% @clients.each do |client| %>
+      <tr>        
+        <td><%= link_to client.client_name, edit_client_path(client) %></td>
+      </tr>
+      <tr>
+        <td>
+          <ul>
+            <% client.publications.each do |publication| %>
+             <li> <%= link_to publication.pub_name, edit_client_publication_path(client, publication) %> </li>
+            <% end %>
+            <li style="color: red"><strong>NEW PUBLICATION for <%= link_to client.client_name, new_client_publication_path(client) %><strong></li>
+          </ul>
+        </td>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

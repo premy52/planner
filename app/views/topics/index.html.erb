@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+topics\index.html
+<h1>Topics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caption</th>
+      <th>Supertopic</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @topics.each do |topic| %>
+      <tr>
+        <td><%= topic.caption %></td>
+        <td><%= topic.super_topic.caption %></td>        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Topic', new_super_topic_topic_path %>

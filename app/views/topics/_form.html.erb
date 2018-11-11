@@ -1,0 +1,38 @@
+<%= form_for(
+
+[@topic.super_topic, @topic]
+
+) do |f| %>
+  <% if topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+      <ul>
+      <% topic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Topic caption' %>
+    <%= f.text_field :caption, :size=>"70", autofocus: true  %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+  <hr>
+        OPTIONAL: change SuperTopic here <br>(and click on "Update Topic" button above)
+        <div class="field">
+          <% SuperTopic.order(:caption).each do |supertopic| %>
+            <%= f.radio_button :super_topic_id, supertopic.id  %>
+              <% if @topic.super_topic_id == supertopic.id %>
+                <strong><font color="red"> <%= supertopic.caption %></br></font></strong>
+              <% else %>
+                <%= supertopic.caption %></br>
+              <% end %>
+          <% end %>
+        </div>
+
+<% end %>

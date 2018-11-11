@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @topic.year %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @topic.month %>
+</p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @topic.caption %>
+</p>
+
+<p>
+  <strong>Supertopic:</strong>
+  <%= @topic.supertopic %>
+</p>
+
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>

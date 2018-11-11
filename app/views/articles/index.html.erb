@@ -1,0 +1,104 @@
+<%= render 'layouts/header' %>
+<% if logged_in? %>
+  <div id='header'>
+    <table>
+      <tr>
+        <td><h1>Client/Topic/Articles History</h1></td>
+        <td><%= link_to 'New Article', new_article_path %></td>
+        <td><%= link_to 'Clients & Publications', clients_path %></td>
+        <td><%= link_to 'Supertopics & Topics', super_topics_path %></td>
+        <td><strong><font color="red"><background color="yellow"> <%= notice %> </background></font></strong></td>
+        
+
+    </table>
+  <% seq = 0 %>
+  <table>
+    <col width = 300 >
+    <% (Publication.count).times do |i| %>
+      <col width = 100 >
+    <% end %>
+  <!-- header -->
+    <tr>  
+      <td align="right"><strong>Client</strong></td>
+      <% pub_column = 0 %>
+      <% pub_column_hash = {} %>
+      <% Publication.ordered.each do |pub| %>
+        <td class="fixed_table">
+          <strong><%= link_to pub.client.client_name, edit_client_path(pub.client) %></strong><br>
+        </td>
+      <% end %>
+    </tr>
+    <tr>  
+      <td align="right"><i>Publication</i></td>
+      <% pub_column = 0 %>
+      <% pub_column_hash = {} %>
+      <% Publication.ordered.each do |pub| %>
+        <td class="fixed_table">
+          <i><%= link_to pub.pub_name, edit_client_publication_path(pub.client, pub) %><br></i>
+
+  <!-- checking the hashed ordering the clients and publications alphabetically
+  <% pub_column_hash[pub.id] = pub_column %>
+          <%= pub_column %>
+          <% pub_column += 1 %> -->
+        </td>
+      <% end %>
+    </tr>
+  </table>
+  </div>
+
+  <div id='body'>
+  <table>
+    <col width = 300>
+    <% (Publication.count).times do |i| %>
+      <col width = 100>
+    <% end %>
+  <!-- body -->
+    <tr>
+      <!-- supertopics headers in left column  -->
+      <% SuperTopic.order(:caption).each do |supertopic| %>
+        <td colspan="2"><h2><i><%= link_to supertopic.caption, edit_super_topic_path(supertopic) %></i></h2></td>
+    </tr>
+      <!-- topics rows -->
+      <!-- topics in left column-->
+        <% Topic.where("super_topic_id = ?", supertopic.id).order(:caption).each do |topic| %>
+        <tr class="border_bottom_top">
+        <td><%= link_to topic.caption, edit_super_topic_topic_path(supertopic, topic) %> (<%= topic.topic_articles.count %>)</td>
+          <!-- article columns -->
+          <!-- initialize the prior articles -->
+          <% prior_article_pub_id = '' %>
+          <% prior_article_topic_id = '' %>
+          <% prior_article_offset = 0 %>
+          <% Article.ordered.where("topic_id = ?", topic.id).each do |article| %>
+            <% linkcaption = article.pub_year.to_s + "/" + article.pub_month.to_s %>
+
+            <!-- if same publication and topic as previous, line break and print -->
+            <% if article.publication_id == prior_article_pub_id &&
+              article.topic_id == prior_article_topic_id %>
+              <%= link_to linkcaption, edit_article_path(article) %>
+              <% seq += 1 %> 
+
+            <!-- else offset to next article cell and print -->
+            <% else %>
+            <% offset = pub_column_hash[article.publication_id] %> 
+              <% (offset - prior_article_offset).times do |columnjump| %>
+                <td></td>
+              <% end %>
+            <td class="fixed_table">
+              <%= link_to linkcaption, edit_article_path(article) %>
+              <% seq += 1 %> 
+
+            <% end %>
+              <!-- set up for same pub, same topic for stacking -->
+              <% prior_article_pub_id = article.publication_id %>
+              <% prior_article_topic_id = article.topic_id %>
+              <% prior_article_offset = pub_column_hash[article.publication_id] + 1 %>
+          <% end %>
+        </td>
+        </tr> 
+
+        <% end %>
+
+      <% end %>
+
+  </table>
+<% end %>

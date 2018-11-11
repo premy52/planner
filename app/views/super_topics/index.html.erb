@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+    <td>
+      <h1>Super Topics & Their Topics</h1>
+    </td>
+    <td>
+      <%= link_to 'CANCEL & RETURN', root_path , class: 'button' %>
+    </td>
+  </tr>
+</table>
+
+<%= link_to 'New Super Topic', new_super_topic_path %>
+<hr>
+<br>(click to edit)
+
+<table>
+  <tbody>
+    <% @super_topics.each do |super_topic| %>
+      <tr>
+        <td><%= link_to super_topic.caption, edit_super_topic_path(super_topic) %></td>
+      </tr>
+      <tr>
+        <td>
+          <ul>
+            <% super_topic.topics.order(:caption).each do |subtopic| %>
+             <li> <%= link_to subtopic.caption, edit_super_topic_topic_path(super_topic, subtopic) %> </li>
+            <% end %>
+            <li style="color: red"><strong>NEW TOPIC in <%= link_to super_topic.caption, new_super_topic_topic_path(super_topic) %><strong></li>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

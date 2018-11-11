@@ -1,0 +1,17 @@
+<h1>Users</h1>
+<table>
+	<tr>
+		<th>email </th>
+		<th>admin? </th>
+	</tr>
+	<% @users.each do |user| %>
+	<tr>
+		<td><%= user.email %></td>
+		<td><%= user.admin %></td>
+		<td><%= link_to 'Edit', edit_user_path(user) %></td>
+		<td><%= link_to 'Remove', user_path(user) %></td>
+	</tr>
+	<% end %>
+</table>
+
+<%= link_to 'CANCEL & RETURN', root_path , class: 'button' %>

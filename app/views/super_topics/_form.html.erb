@@ -1,0 +1,22 @@
+<%= form_for(super_topic) do |f| %>
+  <% if super_topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(super_topic.errors.count, "error") %> prohibited this super_topic from being saved:</h2>
+
+      <ul>
+      <% super_topic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :caption, :size=>"70", autofocus: true %>
+    <%= f.text_field :caption %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
