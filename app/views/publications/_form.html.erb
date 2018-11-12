@@ -18,8 +18,11 @@
     <%= f.label 'Publication name:' %>
     <%= f.text_field :pub_name, :size=>"70", autofocus: true %>
   </div>
-    
-    <% f.text_field :client_id %>
+ 
+  <div style="display: none;">
+    <%= f.text_field :client_id %>
+  </div>
+ 
   <div class="actions">
     <%= f.submit %>
   </div>
