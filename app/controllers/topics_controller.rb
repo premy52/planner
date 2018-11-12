@@ -27,7 +27,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
       if @topic.save
-        redirect_to root_path
+        redirect_to root_path, notice: "Topic #{@topic.caption} was successfully created under #{@topic.super_topic.caption}" 
       else
         render :new
       end
@@ -37,7 +37,7 @@ class TopicsController < ApplicationController
   # PATCH/PUT /topics/1.json
   def update
     if @topic.update(topic_params)
-      redirect_to root_path
+      redirect_to root_path, notice: "Topic #{@topic.caption} was successfully updated under #{@topic.super_topic.caption}"
     else
       render :edit
     end
