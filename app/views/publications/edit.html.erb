@@ -4,6 +4,6 @@
 <hr>
 <div>
 	<% if current_user_admin? %>
-		<%= link_to 'DELETE THIS PUBLICATION and ALL ITS ARTICLES', client_publication_path(@publication.client, @publication), class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@publication.pub_name}?"} %>
+		<%= link_to 'DELETE THIS PUBLICATION & ALL ITS ARTICLES', client_publication_path(@publication.client, @publication), class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@publication.pub_name}?"} %>
   <% end %>
 </div>

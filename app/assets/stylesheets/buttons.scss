@@ -3,20 +3,21 @@
 a.scarybutton {
   display: inline-block;
   border: 1px $scary-color solid;
-  border-radius: 4px;
-  padding: 4px 60px;
-  color: $scary-color;
-	text-decoration: none;	
+  border-radius: 20px;
+  padding: 4px 20px;
+  color: white;
+  background-color: $scary-color;
+	font-weight: bold;	
   &:hover {
-    background-color: $scary-color;
-	  color: $primary-background-color;
+    background-color: $primary-background-color;
+	  color: $scary-color;
     text-shadow: 0;
     text-decoration: underline;
   }
   &.ok {
 	  font-family: Arial, Helvetica, sans-serif;
 	  font-size: 14px;
-	  color: $scary-color;
+	  color: blue;
 	  padding: 10px 19px;
 	  background: -moz-linear-gradient(
 		  top,
@@ -46,12 +47,12 @@ a.scarybutton {
 
 }
 
-
 a.button {
   display: inline-block;
   border: 1px $subdued-color solid;
   border-radius: 4px;
   padding: 4px 6px;
+  background-color: $subdued-color;
   text-decoration: none;
   &:hover {
     background-color: $subdued-color;
