@@ -3,7 +3,7 @@
 <%= render 'form', topic: @topic %>
 <hr>
 Articles with this topic
-<% @topic.topic_articles.each do |article| %>
+<% @topic.topic_articles.order(pub_year: :desc, pub_month: :desc).each do |article| %>
 
 	<p>
 		<%= link_to article.linkcaption, edit_article_path(article) %>
@@ -17,7 +17,6 @@ Articles with this topic
 
 <hr>
 <div>
-	<%= link_to 'CANCEL & RETURN', root_path , class: 'button' %>
 	<% if current_user_admin? %>
 		<%= link_to 'DELETE THIS TOPIC', super_topic_topic_path(@topic.super_topic, @topic), class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@topic.caption}?"} %>
   <% end %>

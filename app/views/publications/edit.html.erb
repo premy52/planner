@@ -3,7 +3,6 @@
 <%= render 'form', publication: @publication %>
 <hr>
 <div>
-	<%= link_to 'CANCEL & RETURN', root_path , class: 'button' %>
 	<% if current_user_admin? %>
 		<%= link_to 'DELETE THIS PUBLICATION and ALL ITS ARTICLES', client_publication_path(@publication.client, @publication), class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@publication.pub_name}?"} %>
   <% end %>

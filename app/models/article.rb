@@ -7,7 +7,7 @@ class Article < ApplicationRecord
   validates :pub_year, :pub_month, :publication_id, :topic_id, presence: true
 
   scope :ordered, -> { includes(topic: :super_topic, publication: :client).order('super_topics.caption', 'topics.caption', 'clients.client_name', 'publications.pub_name', pub_year: :desc , pub_month: :desc)}
-
+  
   def deslug(link_text)
   	# link_text.downcase
   	# strip right .htm 
@@ -40,6 +40,8 @@ class Article < ApplicationRecord
     self.pub_year.to_s + "/" + self.pub_month.to_s
   end
 
-     
+  def year_month
+    self.pub_year.to_s + self.pub_month.to_s
+  end
 
 end

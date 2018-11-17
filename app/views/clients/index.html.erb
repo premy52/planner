@@ -1,17 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<table>
-  <tr>
-    <td>
-      <h1>Clients & Their Publications</h1>
-    </td>
-    <td>
-      <%= link_to 'CANCEL & RETURN', root_path, class: 'button' %>
-    </td>
-  </tr>
-</table>
+<h1>Clients & Their Publications</h1>
 
-<%= link_to 'Create a New Client', new_client_path, class: 'button' %>
+<div>
+  <%= link_to 'Create a New Client', new_client_path, class: 'button' %>
+  <%= link_to 'CANCEL & RETURN', root_path, class: 'button' %>
+</div>
+
 <hr>
 <br>(click to edit)
 

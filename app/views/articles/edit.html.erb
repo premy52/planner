@@ -14,8 +14,5 @@ Link: <a href="<%= @article.link %>" target="_blank"><%= @article.link %></a>
 
 <hr>
 <div>
-	<%= link_to 'CANCEL & RETURN', root_path , class: 'button' %>
-	
-	  <%= link_to 'DELETE THIS ARTICLE', article_path, class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@article.caption}?"} %>
-  
+  <%= link_to 'DELETE THIS ARTICLE', article_path, class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@article.caption}?"} %>
 </div>
