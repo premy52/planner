@@ -3,9 +3,11 @@
 
 <%= render 'form', super_topic: @super_topic %>
 
-<hr>
+
 <div>
-	<% if current_user_admin? %>
-	  <%= link_to 'DELETE THIS SuperTopic & ITS TOPICS', super_topic_path, class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@caption}?"} %>
+	<% if current_user_admin? && @super_topic.topics.empty? %>
+		<hr>
+		Since the supertopic <i style="color: blue"><%= @super_topic.caption %></i> has no topics, you may <br>
+	  <%= link_to 'DELETE THIS SuperTopic', root_path, class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@caption}?"} %>
 	  <% end %>
 </div>

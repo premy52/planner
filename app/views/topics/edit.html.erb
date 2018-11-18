@@ -1,23 +1,25 @@
 <h1>Editing Topic: <i style="color: blue"><%= @topic.caption %></i> </h1>
 
 <%= render 'form', topic: @topic %>
-<hr>
-Articles with this topic
-<% @topic.topic_articles.order(pub_year: :desc, pub_month: :desc).each do |article| %>
 
-	<p>
-		<%= link_to article.linkcaption, edit_article_path(article) %>
-		<i style="color: blue"><%= article.caption %> </i>
-		<%= article.publication.client.client_name %> 
-		<%= article.publication.pub_name %> 
-		<a href="<%= article.link %>" target="_blank"><%= article.link %></a>
-		
-	</p>
+<% if @topic.articles.present? %>
+	<hr>
+	Articles with this topic
+	<% @topic.topic_articles.order(pub_year: :desc, pub_month: :desc).each do |article| %>
+		<p>
+			<%= link_to article.linkcaption, edit_article_path(article) %>
+			<i style="color: blue"><%= article.caption %> </i>
+			<%= article.publication.client.client_name %> 
+			<%= article.publication.pub_name %> 
+			<a href="<%= article.link %>" target="_blank"><%= article.link %></a>
+		</p>
+	<% end %>
 <% end %>
 
-<hr>
 <div>
-	<% if current_user_admin? %>
+	<% if current_user_admin? && @topic.articles.empty? %>
+		<hr>
+		Since the topic <i style="color: blue"><%= @topic.caption %></i> has no articles, you may <br>
 		<%= link_to 'DELETE THIS TOPIC', super_topic_topic_path(@topic.super_topic, @topic), class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@topic.caption}?"} %>
   <% end %>
 </div>
