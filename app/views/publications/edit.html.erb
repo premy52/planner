@@ -1,9 +1,27 @@
 <h1>Editing Publication: <i style="color: blue"><%= @publication.client.client_name %>/<%= @publication.pub_name %></i></h1>
 
 <%= render 'form', publication: @publication %>
-<hr>
+
+<% if @publication.articles.present? %>
+	<hr>
+	Articles for this publication with [<strong> Super Topic: Topic</strong> ]
+	<% @publication.articles.order(pub_year: :desc, pub_month: :desc).each do |article| %>
+		<p>
+			<%= link_to article.linkcaption, edit_article_path(article) %>
+			<i style="color: blue"><%= article.caption %> </i>
+			[ <strong> <%= article.topic.super_topic.caption %>: 
+			<%= article.topic.caption %> </strong>]
+			<a href="<%= article.link %>" target="_blank"><%= article.link %></a>
+		</p>
+	<% end %>
+<% end %>
+
 <div>
-	<% if current_user_admin? %>
-		<%= link_to 'DELETE THIS PUBLICATION & ALL ITS ARTICLES', client_publication_path(@publication.client, @publication), class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@publication.pub_name}?"} %>
+	<% if current_user_admin?  && @publication.articles.empty? %>
+		<br><br><br><br>
+		<hr>
+		Since the publication <i style="color: blue"><%= @publication.client.client_name %>: <%= @publication.pub_name %></i> has no articles, you may <br>
+
+		<%= link_to 'DELETE THIS PUBLICATION', client_publication_path(@publication.client, @publication), class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@publication.pub_name}?"} %>
   <% end %>
 </div>

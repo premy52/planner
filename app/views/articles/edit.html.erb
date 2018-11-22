@@ -5,7 +5,7 @@
 			<%= @article.caption %>
 	<% end %>
 </i></h1>
-<p> <%= @article.pub_month %>/<%= @article.pub_year %> in <%= @article.publication.client.client_name %>: <%= @article.publication.pub_name %> </p>
+<h2> <%= @article.pub_month %>/<%= @article.pub_year %> in <%= @article.publication.client.client_name %>: <%= @article.publication.pub_name %> </h2>
 
 Link: <a href="<%= @article.link %>" target="_blank"><%= @article.link %></a>
 <hr>

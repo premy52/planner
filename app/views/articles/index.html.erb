@@ -8,9 +8,8 @@
         <td><%= link_to 'Clients & Publications', clients_path %></td>
         <td><%= link_to 'Supertopics & Topics', super_topics_path %></td>
         <td><strong><font color="red"><background color="yellow"> <%= notice %> </background></font></strong></td>
-        
-
     </table>
+
   <% seq = 0 %>
   <table>
     <col width = 300 >
@@ -19,7 +18,7 @@
     <% end %>
   <!-- header -->
     <tr>  
-      <td align="right"><strong>Client</strong></td>
+      <td align="right" ><strong>Client</strong></td>
       <% pub_column = 0 %>
       <% pub_column_hash = {} %>
       <% Publication.ordered.each do |pub| %>
@@ -48,7 +47,7 @@
 
   <div id='body'>
   <table>
-    <col width = 300>
+    <col width = 300 >
     <% (Publication.count).times do |i| %>
       <col width = 100>
     <% end %>
@@ -56,7 +55,9 @@
     <tr>
       <!-- supertopics headers in left column  -->
       <% SuperTopic.order(:caption).each do |supertopic| %>
-        <td colspan="2"><h2><i><%= link_to supertopic.caption, edit_super_topic_path(supertopic) %></i></h2></td>
+        <td colspan="8"><h2><i><%= link_to supertopic.caption, edit_super_topic_path(supertopic) %></i></h2></td>
+
+
     </tr>
       <!-- topics rows -->
       <!-- topics in left column-->

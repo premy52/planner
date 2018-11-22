@@ -18,6 +18,7 @@
 
 <div>
 	<% if current_user_admin? && @topic.articles.empty? %>
+		<br><br><br><br>
 		<hr>
 		Since the topic <i style="color: blue"><%= @topic.caption %></i> has no articles, you may <br>
 		<%= link_to 'DELETE THIS TOPIC', super_topic_topic_path(@topic.super_topic, @topic), class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@topic.caption}?"} %>

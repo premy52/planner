@@ -1,11 +1,11 @@
 <h1>Editing Client: <i style="color: blue"><%= @client.client_name%></i></h1>
 
 <%= render 'form', client: @client %>
-
-<hr>
-
 <div>
-	<% if current_user_admin? %>
-	  <%= link_to 'DELETE THIS CLIENT & ITS PUBLICATIONS', client_path, class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@client_name}?"} %>
+	<% if current_user_admin? && @client.publications.empty? %>
+	<br><br><br><br>
+	<hr>
+		Since the client <i style="color: blue"><%= @client.client_name %></i> has no publications, you may <br>
+	  <%= link_to 'DELETE THIS CLIENT', client_path, class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@client_name}?"} %>
 	  <% end %>
 </div>

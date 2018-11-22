@@ -6,8 +6,9 @@
 
 <div>
 	<% if current_user_admin? && @super_topic.topics.empty? %>
+		<br><br><br><br>
 		<hr>
 		Since the supertopic <i style="color: blue"><%= @super_topic.caption %></i> has no topics, you may <br>
-	  <%= link_to 'DELETE THIS SuperTopic', root_path, class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@caption}?"} %>
+	  <%= link_to 'DELETE THIS SuperTopic', super_topic_path, class: 'scarybutton', method: :delete, data: {confirm: "Are you sure you want to delete #{@super_topic.caption}?"} %>
 	  <% end %>
 </div>
