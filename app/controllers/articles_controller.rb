@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to root_path, notice: "Article #{@article.caption} was successfully created." }
+        format.html { redirect_to root_path, notice: "Article \"#{@article.caption}\" was successfully created." }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to root_path, notice: "Article #{@article.caption} was successfully updated." }
+        format.html { redirect_to root_path, notice: "Article \"#{@article.caption}\" was successfully updated." }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class ArticlesController < ApplicationController
     exiting_article_caption = @article.caption
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: "Article #{exiting_article_caption} was successfully deleted." }
+      format.html { redirect_to root_path, notice: "Article \"#{exiting_article_caption}\" was successfully deleted." }
       format.json { head :no_content }
     end
   end
