@@ -3,7 +3,7 @@
   <div id='header'>
     <table>
       <tr>
-        <td><h1>Client/Topic/Articles History</h1></td>
+        <td><h1>Mapping <%= Article.all.count %> Articles</h1></td>
         <td><%= link_to 'New Article', new_article_path %></td>
         <td><%= link_to 'Clients & Publications', clients_path %></td>
         <td><%= link_to 'Supertopics & Topics', super_topics_path %></td>
@@ -11,6 +11,10 @@
     </table>
 
   <% seq = 0 %>
+  <style>
+     table {table-layout: fixed;}
+     table td { word-break: break-word; }
+   </style>
   <table>
     <col width = 300 >
     <% (Publication.count).times do |i| %>
@@ -33,8 +37,8 @@
       <% pub_column_hash = {} %>
       <% Publication.ordered.each do |pub| %>
         <td class="fixed_table">
-          <i><%= link_to pub.pub_name, edit_client_publication_path(pub.client, pub) %><br></i>
-
+          <i><%= link_to pub.pub_name, edit_client_publication_path(pub.client, pub) %></i>
+          (<%= pub.articles.count %>)
   <!-- checking the hashed ordering the clients and publications alphabetically
   <% pub_column_hash[pub.id] = pub_column %>
           <%= pub_column %>

@@ -2,20 +2,24 @@
 
 <%= render 'form', topic: @topic %>
 
+<!-- LISTING THE ARTICLES FOR THIS TOPIC,IF PRESENT -->
 <% if @topic.articles.present? %>
 	<hr>
-	Articles with this topic
-	<% @topic.topic_articles.order(pub_year: :desc, pub_month: :desc).each do |article| %>
-		<p>
+	<%= @topic.topic_articles.count %> articles on this topic
+	<ol>
+		<% @topic.topic_articles.intra_topic_ordered.each do |article| %>
+		<li>
 			<%= link_to article.linkcaption, edit_article_path(article) %>
+			<strong>[ <%= article.publication.client.client_name %>: 
+			<%= article.publication.pub_name %> ]</strong>
 			<i style="color: blue"><%= article.caption %> </i>
-			<%= article.publication.client.client_name %>: 
-			<%= article.publication.pub_name %> 
 			<a href="<%= article.link %>" target="_blank"><%= article.link %></a>
-		</p>
+		</li>
 	<% end %>
+	</ol>
 <% end %>
 
+<!-- IF ADMIN AND NO ARTICLES, TOPIC MAY BE DELETED -->
 <div>
 	<% if current_user_admin? && @topic.articles.empty? %>
 		<br><br><br><br>
