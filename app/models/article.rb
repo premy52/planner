@@ -12,6 +12,21 @@ class Article < ApplicationRecord
   
   scope :intra_publication_ordered,   -> { includes(topic: :super_topic).order('pub_year DESC', 'pub_month DESC', 'super_topics.caption', 'topics.caption' )}
 
+  MONTH_NAME = {
+                1 => "January",
+                2 => "February",
+                3 => "March",
+                4 => "April",
+                5 => "May",
+                6 => "June",
+                7 => "July",
+                8 => "August",
+                9 => "September",
+                10 => "October",
+                11 => "November",
+                12 => "December"
+                }
+
   def deslug(link_text)
   	# link_text.downcase
   	# strip right .htm 
@@ -34,6 +49,18 @@ class Article < ApplicationRecord
   def self.minimum_year
      # Article.pluck(:pub_year).min
      2012
+  end
+
+  def self.earliest_article_date
+     pluckarray = Article.distinct.pluck(:pub_year, :pub_month)
+     earliest_year_mo = pluckarray.min
+     MONTH_NAME[ earliest_year_mo[1] ] + " " + earliest_year_mo[0].to_s
+  end
+
+  def self.latest_article_date
+     pluckarray = Article.distinct.pluck(:pub_year, :pub_month)
+     earliest_year_mo = pluckarray.max
+     MONTH_NAME[ earliest_year_mo[1] ] + " " + earliest_year_mo[0].to_s
   end
 
   def self.next_year
