@@ -3,8 +3,7 @@
   <div id='header'>
     <table>
       <tr>
-        <td><h3>Mapping <%= Article.all.count %> Articles, 
-          <%= Article.earliest_article_date %> to <%= Article.latest_article_date %></h3></td>
+        <td><h3>Mapping <%= Article.all.count %> Articles</h3></td>
         <td><%= link_to 'New Article', new_article_path %></td>
         <td><%= link_to 'Clients & Publications', clients_path %></td>
         <td><%= link_to 'Supertopics & Topics', super_topics_path %></td>
