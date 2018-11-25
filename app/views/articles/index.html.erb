@@ -25,18 +25,26 @@
       <td align="right" ><strong>Client</strong></td>
       <% pub_column = 0 %>
       <% pub_column_hash = {} %>
+      <% thisclient = "dummystartzzzzzzzzzzzz" %>
+      <% priorclient = "blankstartzzzzzzzzzzzz" %>
       <% Publication.ordered.each do |pub| %>
-        <td class="fixed_table">
-          <strong><%= link_to pub.client.client_name, edit_client_path(pub.client) %></strong><br>
-        </td>
+        <!-- merge client column header for multi-publication clients -->
+        <% thisclient = pub.client %>
+        <% if thisclient != priorclient %>
+          <td class="fixed_table" colspan ="<%= pub.client.pub_count %>" >
+            <strong><%= link_to pub.client.client_name, edit_client_path(pub.client) %></strong>
+          </td>
+        <% end %>
+        <% priorclient = thisclient %>
       <% end %>
+ 
     </tr>
     <tr>  
       <td align="right"><i>Publication</i></td>
       <% pub_column = 0 %>
       <% pub_column_hash = {} %>
       <% Publication.ordered.each do |pub| %>
-        <td class="fixed_table">
+        <td class="fixed_table" >
           <i><%= link_to pub.pub_name, edit_client_publication_path(pub.client, pub) %></i>
           (<%= pub.articles.count %>)
   <!-- checking the hashed ordering the clients and publications alphabetically
