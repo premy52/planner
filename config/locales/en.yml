@@ -21,3 +21,28 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      article:
+        caption: "Article Title"
+        pub_year: "Publication Year"
+        pub_month: "Publication Month"
+        topic_id: "Topic"
+        publication_id: "Publication Title"
+        link: "URL"        
+    errors:
+      models:
+        article:
+          attributes:
+            caption: 
+              blank: "Is Required"
+            pub_year: 
+              blank: "Is Required"
+            pub_month: 
+              blank: "Is Required"
+            topic_id:
+              blank: "Is Required"
+            publication_id: 
+              blank: "Is Required"
+            link: 
+              "Must be Unique; This One Is Already In Use"
