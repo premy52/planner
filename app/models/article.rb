@@ -6,6 +6,7 @@ class Article < ApplicationRecord
 
   validates :caption, :pub_year, :pub_month, :publication_id, :topic_id, presence: true
   validates :link, uniqueness: true, if: 'link.present?'  
+  # Custom messages for validation set up in /config/locales/en.yml
 
   scope :ordered,                 -> { includes(topic: :super_topic, publication: :client).order('super_topics.caption', 'topics.caption', 'clients.client_name', 'publications.pub_name', pub_year: :desc, pub_month: :desc)}
   
